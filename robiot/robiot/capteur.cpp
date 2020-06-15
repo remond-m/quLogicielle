@@ -1,1 +1,0 @@
-#include "capteur.h"

@@ -1,5 +1,5 @@
 #pragma once
-class capteur
+class sensor
 {
 };
 
