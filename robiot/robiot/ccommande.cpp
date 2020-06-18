@@ -1,6 +1,6 @@
 #include "ccommande.h"
 
-CCommande::CCommande(int x, int y, int arbre, double timer, string address) {
+CCommande::CCommande( int arbre, double timer, string address) {
 	
 	vector<vector<int>> posArbres;
 	
@@ -24,8 +24,6 @@ CCommande::CCommande(int x, int y, int arbre, double timer, string address) {
 		cout << "error reading file" << endl;
 	}
 	
-	this->x_coord = x;
-	this->y_coord = y;
 	this->arbre_courant = arbre;
 	this->arbres_coord = posArbres;
 	this->timer = timer;
@@ -44,7 +42,8 @@ vector<int> CCommande::arbreSuivant() {
 
 vector<vector<int>> CCommande::dijkstra(int a_modifier) {
 
-
+	vector<vector<int>> test;
+	return test;
 }
 
 
