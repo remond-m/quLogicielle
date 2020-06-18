@@ -6,13 +6,13 @@ using namespace std;
 class Sensor
 {
 private : 
-	char map[100][100];
+	vector<vector<char>> map;
 public :
 	//constructor
 	Sensor(string address);
 
 	//read
-	char* getMap();
+	char getChar(int i, int j);
 };
 
 

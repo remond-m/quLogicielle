@@ -2,10 +2,15 @@
 //
 
 #include <iostream>
+#include "sensor.h"
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello CDTI!\n";
+    //test class sensor
+    Sensor testSensor("D:/Qualite_logiciel/TP/quLogicielle/robiot/NOM.txt");
+    cout << " La lettre à la coordonnee(2; 5) est: " << testSensor.getChar(1, 1) << endl;
+ 
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
