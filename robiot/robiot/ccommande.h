@@ -21,7 +21,8 @@ public:
 	double getCapacity(void);
 	vector<int> arbreSuivant();
 	void deplacement(vector<vector<int>>);
-	vector<vector<int>> dijkstra(vector<int>);
+	vector<vector<int>> dijkstra(vector<int>, vector<int>, int, int largeur, Sensor sens);
+	int vecteurpresent(vector<int> aComparer, vector < vector<int>> comparer);
 private :
 	CMoteur moteur;
 	CCompas compas;

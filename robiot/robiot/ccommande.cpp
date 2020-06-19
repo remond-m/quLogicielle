@@ -1,5 +1,5 @@
 #include "ccommande.h"
-
+#include <math.h>
 
 CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle) {
 
@@ -70,12 +70,97 @@ void CCommande::deplacement(vector<vector<int>> coords) {
 	batterie.addCapacity(moteur.getTempsFonctionnement());
 }
 
-vector<vector<int>> CCommande::dijkstra(vector<int> a_modifier) {
+vector<vector<int>> CCommande::dijkstra(vector<int> depart, vector<int> arrivee, int longueur, int largeur, Sensor sens) {
+	//def des variables
+	vector<int> depart; //x et y
+	vector<int> arrivee;
 
-	vector<vector<int>> test;
-	return test;
+	int i, j, min = 0;
 
+	vector<vector<int>> voisins;
+	vector<int> position = depart;
+	vector<vector<int>> chemins;
+	chemins.push_back(depart);
+	vector<vector<int>> cheminFinal;
+
+	while (position != arrivee) {
+		vector<int> voisin;
+		voisin.push_back(depart[0] + 1);
+		voisin.push_back(depart[1]);
+		if (sens.getChar(voisin[0], voisin[1]) == ' ' && !vecteurpresent(voisin, chemins)) {
+			voisin.push_back(1 + min);
+		}
+		else {
+			voisin.push_back(10000 + min);
+		}
+		if (min != 0 && voisin[2] < min) {
+			min = voisin[2];
+		}
+		voisins.push_back(voisin);
+
+		voisin.push_back(depart[0] - 1);
+		voisin.push_back(depart[1]);
+		if (sens.getChar(voisin[0], voisin[1]) == (' ' || 'O') && !vecteurpresent(voisin, chemins)) {
+			voisin.push_back(1 + min);
+		}
+		else {
+			voisin.push_back(10000 + min + min + min);
+		}
+		if (min != 0 && voisin[2] < min) {
+			min = voisin[2];
+		}
+		voisins.push_back(voisin);
+
+		voisin.push_back(depart[0]);
+		voisin.push_back(depart[1] + 1);
+		if (sens.getChar(voisin[0], voisin[1]) == (' ' || 'O') && !vecteurpresent(voisin, chemins)) {
+			voisin.push_back(1 + min);
+		}
+		else {
+			voisin.push_back(10000 + min + min);
+		}
+		if (min != 0 && voisin[2] < min) {
+			min = voisin[2];
+		}
+		voisins.push_back(voisin);
+
+		voisin.push_back(depart[0]);
+		voisin.push_back(depart[1] - 1);
+		if (sens.getChar(voisin[0], voisin[1]) == (' ' || 'O') && !vecteurpresent(voisin, chemins)) {
+			voisin.push_back(1 + min);
+		}
+		else {
+			voisin.push_back(10000 + min);
+		}
+		if (min != 0 && voisin[2] < min) {
+			min = voisin[2];
+		}
+		voisins.push_back(voisin);
+
+		for (i = 0; i < voisin.size(); i++) {
+			if (voisins[i][2] == min) {
+				position = voisins[i];
+				cheminFinal[min] = position;
+				break;
+			}
+		}
+
+	}
+	return cheminFinal;
 }
+
+int CCommande::vecteurpresent(vector<int> aComparer, vector<vector<int>> comparer) {
+	vector<vector<int>> tmp = comparer;
+	int test = 0;
+	while (tmp.size() != 0) {
+		if (comparer.back()[0] == aComparer[0] or comparer.back()[1] == aComparer[1]) {
+			test = 1;
+		}
+		comparer.pop_back();
+	}
+	return test;
+}
+
 
 double CCommande::getTempsParcours(void) {
 	return moteur.getTempsFonctionnement() + 300 * getNbMesures();
