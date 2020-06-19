@@ -1,5 +1,6 @@
 #include "cmoteur.h"
 
+
 CMoteur::CMoteur() {
 	this->compas = CCompas();
 	this->temps_fonctionnement = 0;

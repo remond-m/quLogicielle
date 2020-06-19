@@ -24,7 +24,6 @@ int main()
     commande.affichage();
     
     system("PAUSE");
-    
 
     //test class sensor
     //Sensor testSensor("D:/Qualite_logiciel/TP/quLogicielle/robiot/NOM.txt");
