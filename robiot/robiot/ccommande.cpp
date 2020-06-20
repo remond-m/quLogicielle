@@ -1,6 +1,7 @@
 #include "ccommande.h"
 #include <math.h>
 
+
 CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle) {
 
 	
@@ -70,7 +71,7 @@ void CCommande::deplacement(vector<vector<int>> coords) {
 	batterie.addCapacity(moteur.getTempsFonctionnement());
 }
 
-vector<vector<int>> CCommande::dijkstra(vector<int> depart, vector<int> arrivee, int longueur, int largeur, Sensor sens) {
+vector<vector<int>> CCommande::dijkstra(vector<int> depart, vector<int> arrivee, int longueur, int largeur, CCapteur sens) {
 	//def des variables
 	vector<int> depart; //x et y
 	vector<int> arrivee;

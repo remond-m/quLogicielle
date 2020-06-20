@@ -143,7 +143,6 @@
     <ClCompile Include="ccapteur.cpp" />
     <ClCompile Include="ccompas.cpp" />
     <ClCompile Include="cmoteur.cpp" />
-    <ClCompile Include="sensor.cpp" />
     <ClCompile Include="ccommande.cpp" />
     <ClCompile Include="robiot.cpp" />
   </ItemGroup>
@@ -152,7 +151,6 @@
     <ClInclude Include="ccapteur.h" />
     <ClInclude Include="ccompas.h" />
     <ClInclude Include="cmoteur.h" />
-    <ClInclude Include="sensor.h" />
     <ClInclude Include="ccommande.h" />
     <ClInclude Include="Header.h" />
   </ItemGroup>
