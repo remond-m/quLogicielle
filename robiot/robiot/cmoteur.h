@@ -1,11 +1,11 @@
 #pragma once
-#include "ccompas.h"
+#include "ccommande.h"
 
 class CMoteur
 {
 public:
 	CMoteur();
-	CMoteur(CCompas);
+	CMoteur(CCommande);
 	~CMoteur();
 	void setTempsFonctionnement(double);
 	double getTempsFonctionnement(void);
@@ -15,7 +15,7 @@ public:
 	void gauche(void);
 	void droite(void);
 private:
-	CCompas compas;
+	CCommande commande;
 	double temps_fonctionnement;
 };
 

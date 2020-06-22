@@ -2,12 +2,11 @@
 
 
 CMoteur::CMoteur() {
-	this->compas = CCompas();
 	this->temps_fonctionnement = 0;
 }
 
-CMoteur::CMoteur(CCompas compas) {
-	this->compas = compas;
+CMoteur::CMoteur(CCommande commande) {
+	this->commande = commande;
 	this->temps_fonctionnement = 0;
 }
 
@@ -24,19 +23,19 @@ void CMoteur::addTempsFonctionnement() {
 }
 
 void CMoteur::haut() {
-	compas.movePosition(1, 0);
+	this->commande.compas.movePosition(0, -1);
 }
 
 void CMoteur::bas() {
-	compas.movePosition(-1, 0);
+	this->commande.compas.movePosition(0, 1);
 }
 
 void CMoteur::gauche() {
-	compas.movePosition(0, -1);
+	this->commande.compas.movePosition(-1, 0);
 }
 
 void CMoteur::droite() {
-	compas.movePosition(0, 1);
+	this->commande.compas.movePosition(1, 0);
 }
 
 CMoteur::~CMoteur() {

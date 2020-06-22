@@ -1,5 +1,6 @@
 #pragma once
 #include "cmoteur.h"
+#include "ccompas.h"
 #include "cbatterie.h"
 #include "ccapteur.h"
 #include <fstream>
@@ -10,6 +11,7 @@ using namespace std;
 class CCommande
 {
 public:
+	CCommande();
 	CCommande(string,string);
 	~CCommande();
 	void getListe(void);
@@ -21,11 +23,11 @@ public:
 	double getCapacity(void);
 	vector<int> arbreSuivant();
 	void deplacement(vector<vector<int>>);
-	vector<vector<int>> dijkstra(vector<int>, vector<int>, int, int largeur, Sensor sens);
-	int vecteurpresent(vector<int> aComparer, vector < vector<int>> comparer);
+	vector<vector<int>> dijkstra(vector<int>);
+	int vecteurpresent(vector<int>, vector<vector<int>>);
+	CCompas compas;
 private :
 	CMoteur moteur;
-	CCompas compas;
 	CBatterie batterie;
 	CCapteur capteur;
 	vector<vector<int>> arbres_coord;
