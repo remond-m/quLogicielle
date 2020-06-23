@@ -44,7 +44,7 @@ CCapteur::CCapteur(string address)
 	ifstream mappy(address);
 
 	if (mappy.is_open()) {
-		cout << "Lecture cartographie: OK" << endl;
+		//cout << "Lecture cartographie: OK" << endl;
 		char a;
 		while (mappy.get(a)) {
 			if (a == '\n') {
@@ -57,14 +57,13 @@ CCapteur::CCapteur(string address)
 		}
 		map.push_back(vector<char>(tmp));
 	}
-	else {
+	/*else {
 		cout << "error reading file" << endl;
-
-	}
+	}*/
 }
 
 /**************************************************************
-* METHODE : CCompas::CCapteur
+* METHODE : CCapteur::CCapteur
 * PRESENTATION : renvoie la largeur de la zone etudiee
 * ENTREES : void
 * SORTIES : map.size le nombre de "ligne" donc la largeur de la zone etudiee
@@ -74,7 +73,7 @@ int CCapteur::getLargeurMap() {
 }
 
 /**************************************************************
-* METHODE : CCompas::CCapteur
+* METHODE : CCapteur::CCapteur
 * PRESENTATION : renvoie la longueur de la zone etudiee
 * ENTREES : void
 * SORTIES : map[0].size la taille de la premiere ligne donc la longueur de la zone etudiee
@@ -84,7 +83,7 @@ int CCapteur::getLongueurMap() {
 }
 
 /**************************************************************
-* METHODE : CCompas::CCapteur
+* METHODE : CCapteur::CCapteur
 * PRESENTATION : renvoie le caractere present sur la carte a une coordonnee donnee
 * ENTREES : i la coordonnee x
 *			j la coordonnee y
@@ -95,11 +94,22 @@ char CCapteur::getChar(int i, int j) {
 }
 
 /**************************************************************
-* METHODE : CCompas::CCapteur
+* METHODE : CCapteur::CCapteur
 * PRESENTATION : renvoie le caractere present sur la carte a une coordonnee donnee
 * ENTREES : void
 * SORTIES : void
 * **************************************************************/
 CCapteur::~CCapteur() {
 
+}
+
+/**************************************************************
+* METHODE : CCapteur::getMap
+* PRESENTATION : renvoie tableau de vecteur de la carte
+* ENTREES : void
+* SORTIES : map : carte de la zone a traiter
+* **************************************************************/
+
+vector<vector<char>> CCapteur::getMap(){
+	return this->map;
 }

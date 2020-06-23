@@ -25,6 +25,7 @@
 **************************************************************/
 #pragma once
 #include <vector>
+#include "ccommande.h"
 using namespace std;
 
 class Tests
@@ -34,6 +35,5 @@ public:
 	~Tests();
 	int test_lectureFichierListeArbres(string);
 	int test_lectureFichierCartographie(string);
-	int testCapteur_getChar(CCapteur , char , int , int );
-private:
-}
+	int testCapteur_getChar(CCapteur, char, int, int);
+};

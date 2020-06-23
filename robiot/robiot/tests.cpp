@@ -15,6 +15,7 @@
 * DATE : 15/06/2020
 * ***************************************************************/
 
+#include "stdlib.h"
 #include "tests.h"
 
 /**************************************************************  
@@ -39,10 +40,11 @@ Tests::Tests() {
 *			0 si KO
 *  
 **************************************************************/
-int test_lectureFichierListeArbres(string liste_controle_adresse)
+int Tests::test_lectureFichierListeArbres(string liste_controle_adresse)
 {
 	CCommande test_commande("", liste_controle_adresse);
-	if(test_commande.getArbreCoord().empty()) {
+	vector<vector<int>> test = test_commande.getArbreCoord();
+	if(test.empty()) {
 		return 0;
 	} else {
 		return 1;
@@ -59,10 +61,11 @@ int test_lectureFichierListeArbres(string liste_controle_adresse)
 *			0 si KO
 *  
 **************************************************************/
-int test_lectureFichierCartographie(string cartographie_adresse)
+int Tests::test_lectureFichierCartographie(string cartographie_adresse)
 {
 	CCommande test_commande(cartographie_adresse, "");
-	if(test_commande.getCapteur().getMap().empty()) {
+	vector<vector<char>> test = test_commande.getCapteur().getMap();
+	if(test.empty()) {
 		return 0;
 	} else {
 		return 1;
@@ -82,9 +85,21 @@ int test_lectureFichierCartographie(string cartographie_adresse)
 *			0 si KO
 *  
 **************************************************************/
-int testCapteur_getChar(CCapteur capteur, char reference, int x_test, int y_test) {
+int Tests::testCapteur_getChar(CCapteur capteur, char reference, int y_test, int x_test) {
 	return (capteur.getChar(x_test, y_test) == reference) ? 1 : 0;
 }
 
+/**************************************************************
+* METHODE      : Tests::~Tests
+* PRESENTATION : destructeur de test
+*
+* ENTREES : void
+*
+* SORTIES :
+*
+**************************************************************/
+Tests::~Tests() {
+
+}
 
 

@@ -54,7 +54,7 @@ CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle)
 	vector<int> tmp; //stock colonne
 	ifstream mappy(adresse_liste_controle);
 	if (mappy.is_open()) {
-		cout << "Lecture liste de controle: OK" << endl;
+		//cout << "Lecture liste de controle: OK" << endl;
 		double valeur;
 		int i = 0;
 		while (mappy>>valeur) {
@@ -68,9 +68,9 @@ CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle)
 			i++;
 		}
 		posArbres.push_back(vector<int>(tmp));
-	} else {
+	} /*else {
 		cout << "error reading file" << endl;
-	}
+	}*/
 	
 	this->capteur = CCapteur(adresse_cartographie);
 	this->compas = CCompas();

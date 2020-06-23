@@ -49,7 +49,7 @@ public:
 	vector<int> arbreSuivant();
 	void deplacement(vector<vector<int>>);
 	vector<vector<int>> dijkstra(vector<int>);
-	int vecteurpresent(vector<int>, vector<vector<int>>);
+	//int vecteurpresent(vector<int>, vector<vector<int>>);
 	CCompas getCompas();
 	CCapteur getCapteur();
 private :

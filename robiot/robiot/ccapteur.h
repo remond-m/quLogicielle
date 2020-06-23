@@ -20,7 +20,7 @@ public:
 	char getChar(int i, int j);
 	int getLongueurMap(void);
 	int getLargeurMap(void);
-	vector<vector<char>> getMap(void);
+	vector<vector<char>> getMap();
 private:
 	vector<vector<char>> map;
 };

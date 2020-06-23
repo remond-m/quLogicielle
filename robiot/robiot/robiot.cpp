@@ -36,19 +36,19 @@ int main()
 	std::string fichier_liste_controle = "../liste_de_controle.txt";
     std::string fichier_cartographie = "../cartographie_terrain.txt";
 	/*Lancement de tests unitaires*/
-    Tests tests();
+    Tests tests;
 	//Test de lecture du fichier de cartographie
-	/if(tests.test_lectureFichierCartographie("../cartographie_terrain.tx")) {
+	if(tests.test_lectureFichierCartographie(fichier_cartographie)) {
 		cout << "Test de lecture de cartographie --> OK" << endl;
 	} else {
 		cout << "Test de lecture de cartographie --> KO" << endl;
 	}
 
 	//Test de lecture du fichier de cartographie
-	if(tests.test_lectureFichierListeArbres("../liste_de_controle.txt")) {
+	if(tests.test_lectureFichierListeArbres(fichier_liste_controle)) {
 		cout << "Test de lecture de liste d'arbres a mesurer --> OK" << endl;
 	} else {
-		cout << "Test de lecture de cartographie --> KO" << endl;
+		cout << "Test de lecture de liste d'arbres a mesurer --> KO" << endl;
 	}
 
 	//Test de la fonction getChar du capteur
