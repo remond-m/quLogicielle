@@ -22,11 +22,14 @@
 * OBSERVATIONS :  **************************************************************/
 
 #pragma once
-#include "common.h"
 
 #include <fstream>
 #include <vector>
 #include <iostream>
+#include "ccapteur.h"
+#include "cbatterie.h"
+#include "ccompas.h"
+#include "cmoteur.h"
 using namespace std;
 
 class CCommande

@@ -15,10 +15,10 @@
 * DATE : 15/06/2020
 * ***/
 
-#include "common.h"
 #include <math.h>
 #include <algorithm>
 #include <stdlib.h>
+#include "ccommande.h"
 static const char* __cvs_id = "@(#) $Header$";
 
 /**************************************************************

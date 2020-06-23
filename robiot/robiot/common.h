@@ -17,6 +17,6 @@
 
 #include "ccommande.h"
 #include "cmoteur.h"
-#include "cbatterie.h"
+
 #include "ccompas.h"
 #include "ccapteur.h"

@@ -14,10 +14,11 @@
 * VERSION CVS : 1.0
 * DATE : 15/06/2020
 * ***/
-#include "ccapteur.h"
+
 
 #include <iostream>
 #include <fstream>
+#include "ccapteur.h"
 
 static const char * __cvs_id="@(#) $Header$" ;
 

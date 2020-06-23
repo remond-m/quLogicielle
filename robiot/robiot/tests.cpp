@@ -27,7 +27,7 @@
 *			0 si KO
 *  
 **************************************************************/
-void test_lectureFichierListeArbres(string liste_controle_adresse)
+int test_lectureFichierListeArbres(string liste_controle_adresse)
 {
 	CCommande test_commande("", liste_controle_adresse);
 	if(test_commande.getArbreCoord().empty()) {
@@ -47,7 +47,7 @@ void test_lectureFichierListeArbres(string liste_controle_adresse)
 *			0 si KO
 *  
 **************************************************************/
-void test_lectureFichierCartographie(string cartographie_adresse)
+int test_lectureFichierCartographie(string cartographie_adresse)
 {
 	CCommande test_commande(cartographie_adresse, "");
 	if(test_commande.getCapteur().getMap().empty()) {
@@ -70,7 +70,7 @@ void test_lectureFichierCartographie(string cartographie_adresse)
 *			0 si KO
 *  
 **************************************************************/
-void testCapteur_getChar(CCapteur capteur, char reference, int x_test, int y_test) {
+int testCapteur_getChar(CCapteur capteur, char reference, int x_test, int y_test) {
 	return (capteur.getChar(x_test, y_test) == reference) ? 1 : 0;
 }
 
