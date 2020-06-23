@@ -33,7 +33,7 @@ void test_lectureFichierListeArbres(string liste_controle_adresse)
 	if(test_commande.getArbreCoord().empty()) {
 		return 0;
 	} else {
-		return 1
+		return 1;
 	}
 }
 
