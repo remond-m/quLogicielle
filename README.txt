@@ -1,2 +1,4 @@
 README:
-Branche de test
+
+Branche de releases
+
