@@ -1,3 +1,10 @@
+/************************************************************** * CLASSE : CCapteur
+* PRESENTATION : Classe CCompas pour decrire la position du robiot *
+ * METHODES PUBLIQUES :
+* getChar renvoie le caractere present sur la carte à une coordonnee donnee
+* getLongueurMap renvoie la longueur du terrain etudie
+* getLargeurMap renvoie la largeur du terrain etudie
+**************************************************************/
 #pragma once
 #include <fstream>
 #include <vector>

@@ -1,3 +1,10 @@
+/************************************************************** * CLASSE : CBatterie
+* PRESENTATION : Classe batterie pour decrire l'utilisation de la batterie du robiot *
+ * METHODES PUBLIQUES :
+* setCapacity(double) set la capacite minimale requise de la batterie
+* getCapacity retourne la capacite minimale requise de la batterie
+* addCapacity(double) incremente la capacite minimale requise de la batterie suite a un deplacement, une mesure...
+**************************************************************/
 #pragma once
 class CBatterie
 {
@@ -9,7 +16,5 @@ public:
 	void addCapacity(double);
 
 private:
-	//capacité en W/h
-	double capacity; 
+	double capacity;	//capacite en W/h
 };
-
