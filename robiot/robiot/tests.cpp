@@ -15,8 +15,20 @@
 * DATE : 15/06/2020
 * ***************************************************************/
 
-#include "common.h"
+#include "tests.h"
 
+/**************************************************************  
+* METHODE      : Tests::Tests
+* PRESENTATION : constructeur initialisant l'outil de test  
+*  
+* ENTREES : void
+*  
+* SORTIES :
+*  
+**************************************************************/
+Tests::Tests() {
+
+};
 /**************************************************************  
 * METHODE      : tests::test_lectureFichierListeArbres
 * PRESENTATION : test verifiant si le fichier de liste de controle est lu correctement 

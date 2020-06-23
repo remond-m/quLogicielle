@@ -192,7 +192,7 @@ vector<int> CMoteur::droite() {
 
 /**************************************************************
 * METHODE      : CMoteur::~CMoteur
-* PRESENTATION : d?ruit le moteur
+* PRESENTATION : detruit le moteur
 *
 * ENTREES : void
 *
