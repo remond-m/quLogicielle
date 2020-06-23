@@ -1,15 +1,53 @@
+/** /
+*
+* Copyright(c) CDTI -contrat n° XXXXXXXXX
+* Reproduction et diffusion interdites.
+* Developpe par CDTI NRT
+* Projet Robiot
+*
+*SOUS - SYSTEME : Robiot
+*
+*SOURCE : ccommande.cpp
+* PRESENTATION : commandes de base de la partie commande du robiot
+*
+*AUTEUR : NRT
+* VERSION CVS : 1.0
+* DATE : 15/06/2020
+* ***/
+
 #include "ccommande.h"
 #include <math.h>
 #include <algorithm>
 #include <stdlib.h>
+static const char* __cvs_id = "@(#) $Header$";
 
-
+/**************************************************************
+* METHODE      : CCommande::CCommande
+* PRESENTATION : constructeur de CCommande par defaut
+*
+* ENTREES : void
+*
+* SORTIES : void
+*
+*  **************************************************************/
 CCommande::CCommande() {
 
 }
 
-CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle) {
+/************************************************************** 
+* METHODE      : CCommande::CCommande 
+* PRESENTATION : constructeur de CCommande 
+* 
+* ENTREES : adresse_cartographie : chemin du fichier de cartographie
+*           adresse_liste_controle : chemin du fichier de liste de controle
+* 
+* SORTIES : void
+* 
+* EXCEPTIONS : probleme de lecture du fichier : error reading file 
+*              
+*  **************************************************************/
 
+CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle) {
 	
 	vector<vector<int>> posArbres;
 	
@@ -43,16 +81,42 @@ CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle)
 	this->arbres_coord = posArbres;
 }
 
+/**************************************************************
+* METHODE      : CCommande::getArbreCourant
+* PRESENTATION : Obtention de la position l'arbre courant dans la liste
+*
+* ENTREES : void
+*
+* SORTIES : arbre_courant : position de l'arbre dans la liste
+*
+*  **************************************************************/
 int CCommande::getArbreCourant() {
 	return this->arbre_courant;
 }
 
+/**************************************************************
+* METHODE      : CCommande::arbreSuivant
+* PRESENTATION : selection de l'arbre suivant
+*
+* ENTREES : void
+*
+* SORTIES : arbre_suivant : coordonnees de l'arbre suivant
+*
+*  **************************************************************/
 vector<int> CCommande::arbreSuivant() {
 	vector<int> arbre_suivant = arbres_coord[arbre_courant];
 	arbre_courant = (1 + arbre_courant) % arbres_coord.size();
 	return arbre_suivant;
 }
 
+/**************************************************************
+* METHODE      : CCommande::deplacement
+* PRESENTATION : suivi des coordonnees de déplacement et actions sur le moteur pour déplacement du robot
+*
+* ENTREES : coords : vecteur de coordonnees des cases a parcourir
+*
+* SORTIES : void 
+*  **************************************************************/
 void CCommande::deplacement(vector<vector<int>> coords) {
 	vector<int> pos_actuelle;
 	for (int i = 0; i < coords.size(); i++) {
@@ -82,6 +146,15 @@ void CCommande::deplacement(vector<vector<int>> coords) {
 	moteur.setTempsFonctionnementIntermediaire(0);
 }
 
+/**************************************************************
+* METHODE      : CCommande::dijkstra
+* PRESENTATION : precalcul le chemin à parcourir
+*
+* ENTREES : arrivée : coordonées de l'arbree à atteindre
+*
+* SORTIES : cheminFinal : vecteur de coordonnées des cases a suivre pour le déplacement
+*
+*  **************************************************************/
 vector<vector<int>> CCommande::dijkstra(vector<int> arrivee) {
 	//def des variables
 	vector<int> depart = compas.getPosition(); //x et y
@@ -242,23 +315,62 @@ vector<vector<int>> CCommande::dijkstra(vector<int> arrivee) {
 	return 0;
 }*/
 
-
+/**************************************************************
+* METHODE      : CCommande::getTempsParcours
+* PRESENTATION : Obtenir la valeur du temps d'un parcours
+*
+* ENTREES : void
+*
+* SORTIES : temps de fonctionnement : temps de fonctionement total
+*
+*  **************************************************************/
 double CCommande::getTempsParcours(void) {
 	return moteur.getTempsFonctionnement() + 300 * getNbMesures();
 }
 
+/**************************************************************
+* METHODE      : CCommande::setNbMesures
+* PRESENTATION : modifie la valeur de nb_mesures
+*
+* ENTREES : nb_mesures : la valeur du nombre de mesures
+*
+* SORTIES : void
+*
+*  **************************************************************/
 void CCommande::setNbMesures(int nb_mesures) {
 	this->nb_mesures = nb_mesures;
 }
 
+/**************************************************************
+* METHODE      : CCommande::getNbMesures
+* PRESENTATION : Obtention du nombre total de mesures effectuées
+*
+* ENTREES : void :
+*
+* SORTIES : nb_mesures : le nombre total de mesures
+*
+*  **************************************************************/
 double CCommande::getNbMesures(void) {
 	return this->nb_mesures;
 }
 
+/**************************************************************
+* METHODE      : CCommande::getCapacity
+* PRESENTATION : renvoie la valeur simulée de la capacité la batterie
+*
+* ENTREES : void
+*
+* SORTIES : batterie.getCapacity() : la capacité mesurée de la batterie
+*
+*  **************************************************************/
 double CCommande::getCapacity(void) {
 	return batterie.getCapacity();
 }
 
+/**************************************************************
+* METHODE      : CCommande::affichage
+* PRESENTATION : affiche toutes les valeurs de la simulation
+*  **************************************************************/
 void CCommande::affichage() {
 	cout << "---------------------------------------------" << endl;
 	cout << "SIMULATION TERMINEE :" << endl;
@@ -268,17 +380,23 @@ void CCommande::affichage() {
 	cout << "---------------------------------------------" << endl;
 }
 
+/**************************************************************
+* METHODE      : CCommande::getCompas
+* PRESENTATION : permet d'obtenir le compas de la classe CCommande
+*
+* ENTREES : void
+*
+* SORTIES : CCompas compas : le compas du ccommande
+*
+*  **************************************************************/
 CCompas CCommande::getCompas() {
 	return this->compas;
 }
 
-void CCommande::getListe() {
-	for (int i = 0; i < arbres_coord.size(); i++) {
-		cout << "Position arbre " << (i + 1) << " : " << arbres_coord[i][0] << " / " << arbres_coord[i][1] << endl;
-	}
-}
-
-
+/**************************************************************
+* METHODE      : CCommande::~CCommande
+* PRESENTATION : destructeur de la classe CCommande
+*  **************************************************************/
 CCommande::~CCommande() {
 
 }
