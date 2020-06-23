@@ -139,11 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="capteur.cpp" />
+    <ClCompile Include="cbatterie.cpp" />
+    <ClCompile Include="ccapteur.cpp" />
+    <ClCompile Include="ccompas.cpp" />
+    <ClCompile Include="cmoteur.cpp" />
+    <ClCompile Include="sensor.cpp" />
+    <ClCompile Include="ccommande.cpp" />
     <ClCompile Include="robiot.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="capteur.h" />
+    <ClInclude Include="cbatterie.h" />
+    <ClInclude Include="ccapteur.h" />
+    <ClInclude Include="ccompas.h" />
+    <ClInclude Include="cmoteur.h" />
+    <ClInclude Include="sensor.h" />
+    <ClInclude Include="ccommande.h" />
     <ClInclude Include="Header.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
