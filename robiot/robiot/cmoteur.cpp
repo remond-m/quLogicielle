@@ -3,11 +3,7 @@
 
 CMoteur::CMoteur() {
 	this->temps_fonctionnement = 0;
-}
-
-CMoteur::CMoteur(CCommande commande) {
-	this->commande = commande;
-	this->temps_fonctionnement = 0;
+	this->temps_intermediaire = 0;
 }
 
 void CMoteur::setTempsFonctionnement(double temps) {
@@ -18,24 +14,48 @@ double CMoteur::getTempsFonctionnement() {
 	return this->temps_fonctionnement;
 }
 
+void CMoteur::setTempsFonctionnementIntermediaire(double temps) {
+	this->temps_intermediaire = temps;
+}
+
+double CMoteur::getTempsFonctionnementIntermediaire() {
+	return this->temps_intermediaire;
+}
+
+void CMoteur::addTempsFonctionnementIntermediaire() {
+	this->temps_intermediaire += (10 / 0.42);
+}
+
 void CMoteur::addTempsFonctionnement() {
 	this->temps_fonctionnement += (10/0.42);
 }
 
-void CMoteur::haut() {
-	this->commande.compas.movePosition(0, -1);
+vector<int> CMoteur::haut() {
+	vector<int> position;
+	position.push_back(0);
+	position.push_back(-1);
+	return position;
 }
 
-void CMoteur::bas() {
-	this->commande.compas.movePosition(0, 1);
+vector<int> CMoteur::bas() {
+	vector<int> position;
+	position.push_back(0);
+	position.push_back(1);
+	return position;
 }
 
-void CMoteur::gauche() {
-	this->commande.compas.movePosition(-1, 0);
+vector<int> CMoteur::gauche() {
+	vector<int> position;
+	position.push_back(-1);
+	position.push_back(0);
+	return position;
 }
 
-void CMoteur::droite() {
-	this->commande.compas.movePosition(1, 0);
+vector<int> CMoteur::droite() {
+	vector<int> position;
+	position.push_back(1);
+	position.push_back(0);
+	return position;
 }
 
 CMoteur::~CMoteur() {

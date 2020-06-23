@@ -3,6 +3,7 @@
 #include "ccompas.h"
 #include "cbatterie.h"
 #include "ccapteur.h"
+
 #include <fstream>
 #include <vector>
 #include <iostream>
@@ -19,15 +20,17 @@ public:
 	int getArbreCourant(void);
 	void setNbMesures(int);
 	double getTempsParcours(void);
-	int getNbMesures(void);
+	double getNbMesures(void);
 	double getCapacity(void);
 	vector<int> arbreSuivant();
 	void deplacement(vector<vector<int>>);
 	vector<vector<int>> dijkstra(vector<int>);
 	int vecteurpresent(vector<int>, vector<vector<int>>);
-	CCompas compas;
+	CCompas getCompas();
+	
 private :
 	CMoteur moteur;
+	CCompas compas;
 	CBatterie batterie;
 	CCapteur capteur;
 	vector<vector<int>> arbres_coord;

@@ -35,7 +35,7 @@ CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle)
 	
 	this->capteur = CCapteur(adresse_cartographie);
 	this->compas = CCompas();
-	this->moteur = CMoteur(*this);
+	this->moteur = CMoteur();
 	this->batterie = CBatterie();
 	this->arbre_courant = 0;
 	this->nb_mesures = 0;
@@ -57,23 +57,28 @@ void CCommande::deplacement(vector<vector<int>> coords) {
 	for (int i = 0; i < coords.size(); i++) {
 		pos_actuelle = compas.getPosition();
 		if (pos_actuelle[0] < coords[i][0]) {
-			moteur.droite();
+			compas.movePosition(moteur.droite());
 			moteur.addTempsFonctionnement();
+			moteur.addTempsFonctionnementIntermediaire();
 		}
 		if (pos_actuelle[0] > coords[i][0]) {
-			moteur.gauche();
+			compas.movePosition(moteur.gauche());
 			moteur.addTempsFonctionnement();
+			moteur.addTempsFonctionnementIntermediaire();
 		}
 		if (pos_actuelle[1] < coords[i][1]) {
-			moteur.bas();
+			compas.movePosition(moteur.bas());
 			moteur.addTempsFonctionnement();
+			moteur.addTempsFonctionnementIntermediaire();
 		}
 		if (pos_actuelle[1] > coords[i][1]) {
-			moteur.haut();
+			compas.movePosition(moteur.haut());
 			moteur.addTempsFonctionnement();
+			moteur.addTempsFonctionnementIntermediaire();
 		}
 	}
-	batterie.addCapacity(moteur.getTempsFonctionnement());
+	batterie.addCapacity(moteur.getTempsFonctionnementIntermediaire());
+	moteur.setTempsFonctionnementIntermediaire(0);
 }
 
 vector<vector<int>> CCommande::dijkstra(vector<int> arrivee) {
@@ -245,7 +250,7 @@ void CCommande::setNbMesures(int nb_mesures) {
 	this->nb_mesures = nb_mesures;
 }
 
-int CCommande::getNbMesures(void) {
+double CCommande::getNbMesures(void) {
 	return this->nb_mesures;
 }
 
@@ -260,6 +265,10 @@ void CCommande::affichage() {
 	cout << "Nombre de mesures : " << getNbMesures() << endl;
 	cout << "Capacite de la batterie estimee : " << getCapacity() << " W/h" << endl;
 	cout << "---------------------------------------------" << endl;
+}
+
+CCompas CCommande::getCompas() {
+	return this->compas;
 }
 
 void CCommande::getListe() {

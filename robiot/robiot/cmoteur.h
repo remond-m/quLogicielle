@@ -1,21 +1,24 @@
 #pragma once
-#include "ccommande.h"
+#include <vector>
+using namespace std;
 
 class CMoteur
 {
 public:
 	CMoteur();
-	CMoteur(CCommande);
 	~CMoteur();
 	void setTempsFonctionnement(double);
 	double getTempsFonctionnement(void);
 	void addTempsFonctionnement();
-	void haut(void);
-	void bas(void);
-	void gauche(void);
-	void droite(void);
+	void addTempsFonctionnementIntermediaire(void);
+	void setTempsFonctionnementIntermediaire(double);
+	double getTempsFonctionnementIntermediaire(void);
+	vector<int> haut(void);
+	vector<int> bas(void);
+	vector<int> gauche(void);
+	vector<int> droite(void);
 private:
-	CCommande commande;
 	double temps_fonctionnement;
+	double temps_intermediaire;
 };
 

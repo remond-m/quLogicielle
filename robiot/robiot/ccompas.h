@@ -7,9 +7,9 @@ class CCompas
 public:
 	CCompas();
 	~CCompas();
-	void setPosition(int, int);
+	void setPosition(vector<int>);
 	vector<int> getPosition();
-	void movePosition(int, int);
+	void movePosition(vector<int>);
 
 private:
 	int x_coord;

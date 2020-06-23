@@ -5,9 +5,9 @@ CCompas::CCompas() {
 	this->y_coord = 0;
 }
 
-void CCompas::setPosition(int x, int y) {
-	this->x_coord = x;
-	this->y_coord = y;
+void CCompas::setPosition(vector<int> position) {
+	this->x_coord = position[0];
+	this->y_coord = position[1];
 }
 
 vector<int> CCompas::getPosition() {
@@ -17,9 +17,9 @@ vector<int> CCompas::getPosition() {
 	return position;
 }
 
-void CCompas::movePosition(int x, int y) {
-	this->x_coord += x;
-	this->y_coord += y;
+void CCompas::movePosition(vector<int> position) {
+	this->x_coord += position[0];
+	this->y_coord += position[1];
 }
 
 

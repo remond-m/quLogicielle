@@ -18,16 +18,13 @@ int main()
 
     do {
         commande.deplacement(commande.dijkstra(commande.arbreSuivant()));
+        commande.setNbMesures(commande.getNbMesures() + 1);
     }
     while (commande.getArbreCourant() != 0);
 
     commande.affichage();
     
     system("PAUSE");
-
-    //test class sensor
-    //Sensor testSensor("D:/Qualite_logiciel/TP/quLogicielle/robiot/NOM.txt");
-    //cout << " La lettre à la coordonnee(2; 5) est: " << testSensor.getChar(1, 1) << endl;
 }
     
 
