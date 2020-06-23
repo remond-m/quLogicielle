@@ -4,6 +4,7 @@
 * getChar renvoie le caractere present sur la carte à une coordonnee donnee
 * getLongueurMap renvoie la longueur du terrain etudie
 * getLargeurMap renvoie la largeur du terrain etudie
+* getMap renvoie la cartographie de la zone etudiee
 **************************************************************/
 #pragma once
 #include <fstream>
@@ -19,6 +20,7 @@ public:
 	char getChar(int i, int j);
 	int getLongueurMap(void);
 	int getLargeurMap(void);
+	vector<vector<char>> getMap(void);
 private:
 	vector<vector<char>> map;
 };

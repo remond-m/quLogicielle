@@ -15,15 +15,14 @@
 * CCommande::getCapacity : renvoie la valeur simulée de la capacité la batterie
 * CCommande::affichage : affiche toutes les valeurs de la simulation
 * CCommande::getCompas : permet d'obtenir le compas de la classe CCommande
+* CCommande::getArbreCoord : permet d'obtenir les coordonnees de tous les arbres a mesurer
+* CCommande::getCapteur : permet d'obtenir le capteur du robiot
 * CCommande::~CCommande : destructeur de la classe CCommande
 * 
 * OBSERVATIONS :  **************************************************************/
 
 #pragma once
-#include "cmoteur.h"
-#include "ccompas.h"
-#include "cbatterie.h"
-#include "ccapteur.h"
+#include "common.h"
 
 #include <fstream>
 #include <vector>
@@ -36,6 +35,7 @@ public:
 	CCommande();
 	CCommande(string,string);
 	~CCommande();
+	vector<vector<int>> getArbreCoord(void);
 	void getListe(void);
 	void affichage(void);
 	int getArbreCourant(void);
@@ -48,6 +48,7 @@ public:
 	vector<vector<int>> dijkstra(vector<int>);
 	int vecteurpresent(vector<int>, vector<vector<int>>);
 	CCompas getCompas();
+	CCapteur getCapteur();
 private :
 	CMoteur moteur;
 	CCompas compas;
