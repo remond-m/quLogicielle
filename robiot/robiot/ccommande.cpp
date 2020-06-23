@@ -1,6 +1,6 @@
 /** /
 *
-* Copyright(c) CDTI -contrat n° XXXXXXXXX
+* Copyright(c) CDTI
 * Reproduction et diffusion interdites.
 * Developpe par CDTI NRT
 * Projet Robiot
@@ -15,7 +15,7 @@
 * DATE : 15/06/2020
 * ***/
 
-#include "ccommande.h"
+#include "common.h"
 #include <math.h>
 #include <algorithm>
 #include <stdlib.h>
@@ -111,7 +111,7 @@ vector<int> CCommande::arbreSuivant() {
 
 /**************************************************************
 * METHODE      : CCommande::deplacement
-* PRESENTATION : suivi des coordonnees de déplacement et actions sur le moteur pour déplacement du robot
+* PRESENTATION : suivi des coordonnees de d?lacement et actions sur le moteur pour d?lacement du robot
 *
 * ENTREES : coords : vecteur de coordonnees des cases a parcourir
 *
@@ -148,11 +148,11 @@ void CCommande::deplacement(vector<vector<int>> coords) {
 
 /**************************************************************
 * METHODE      : CCommande::dijkstra
-* PRESENTATION : precalcul le chemin à parcourir
+* PRESENTATION : precalcul le chemin ?parcourir
 *
-* ENTREES : arrivée : coordonées de l'arbree à atteindre
+* ENTREES : arriv? : coordon?s de l'arbree ?atteindre
 *
-* SORTIES : cheminFinal : vecteur de coordonnées des cases a suivre pour le déplacement
+* SORTIES : cheminFinal : vecteur de coordonn?s des cases a suivre pour le d?lacement
 *
 *  **************************************************************/
 vector<vector<int>> CCommande::dijkstra(vector<int> arrivee) {
@@ -343,7 +343,7 @@ void CCommande::setNbMesures(int nb_mesures) {
 
 /**************************************************************
 * METHODE      : CCommande::getNbMesures
-* PRESENTATION : Obtention du nombre total de mesures effectuées
+* PRESENTATION : Obtention du nombre total de mesures effectu?s
 *
 * ENTREES : void :
 *
@@ -356,11 +356,11 @@ double CCommande::getNbMesures(void) {
 
 /**************************************************************
 * METHODE      : CCommande::getCapacity
-* PRESENTATION : renvoie la valeur simulée de la capacité la batterie
+* PRESENTATION : renvoie la valeur simul? de la capacit?la batterie
 *
 * ENTREES : void
 *
-* SORTIES : batterie.getCapacity() : la capacité mesurée de la batterie
+* SORTIES : batterie.getCapacity() : la capacit?mesur? de la batterie
 *
 *  **************************************************************/
 double CCommande::getCapacity(void) {
@@ -391,6 +391,32 @@ void CCommande::affichage() {
 *  **************************************************************/
 CCompas CCommande::getCompas() {
 	return this->compas;
+}
+
+/**************************************************************
+* METHODE      : CCommande::getArbreCoord
+* PRESENTATION : permet d'obtenir les coordonnees de tous les arbres a mesurer
+*
+* ENTREES : void
+*
+* SORTIES : vector<vector<int>> arbres_coord : la cartographie
+*
+*  **************************************************************/
+vector<vector<int>> CCommande::getArbreCoord() {
+	return this->arbres_coord;
+}
+
+/**************************************************************
+* METHODE      : CCommande::getCapteur
+* PRESENTATION : permet d'obtenir le capteur du robiot
+*
+* ENTREES : void
+*
+* SORTIES : CCapteur capteur : le capteur du robiot
+*
+*  **************************************************************/
+CCapteur CCommande::getCapteur() {
+	return this->capteur;
 }
 
 /**************************************************************

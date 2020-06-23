@@ -14,19 +14,55 @@
 * VERSION CVS : 1.0
 * DATE : 15/06/2020
 * ***************************************************************/
-// robiot.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
-//
+
 #include <iostream>
 #include <string>
 #include "ccommande.h"
+#include "tests.cpp"
 using namespace std;
 static const char* __cvs_id = "@(#) $Header$";
 
+/**************************************************************  
+* METHODE      : main::main
+* PRESENTATION : fonction principale de la simulation qui lance le programme
+*  
+* ENTREES : void
+*  
+* SORTIES : void
+*  
+**************************************************************/
 int main()
 {
-    //Réalisation de la classe commande
-    std::string fichier_liste_controle = "../liste_de_controle.txt";
+	std::string fichier_liste_controle = "../liste_de_controle.txt";
     std::string fichier_cartographie = "../cartographie_terrain.txt";
+	/*Lancement de tests unitaires*/
+
+	//Test de lecture du fichier de cartographie
+	if(test_lectureFichierCartographie("../cartographie_terrain.tx")) {
+		cout << "Test de lecture de cartographie --> OK" << endl;
+	} else {
+		cout << "Test de lecture de cartographie --> KO" << endl;
+	}
+
+	//Test de lecture du fichier de cartographie
+	if(test_lectureFichierListeArbres("../liste_de_controle.txt")) {
+		cout << "Test de lecture de liste d'arbres a mesurer --> OK" << endl;
+	} else {
+		cout << "Test de lecture de cartographie --> KO" << endl;
+	}
+
+	//Test de la fonction getChar du capteur
+	CCommande test_commande(fichier_cartographie,fichier_liste_controle);
+	if(testCapteur_getChar(test_commande.getCapteur(), "X", 6, 4)) {
+		cout << "Test de la fonction getChar du capteur --> OK" << endl;
+	} else {
+		cout << "Test de la fonction getChar du capteur --> KO" << endl;
+	}
+	/*Fin des tests unitaires*/
+
+	system("PAUSE");
+
+    //Réalisation de la classe commande
     CCommande commande(fichier_cartographie,fichier_liste_controle);
 
     system("PAUSE");

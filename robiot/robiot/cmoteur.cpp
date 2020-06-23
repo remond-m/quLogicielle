@@ -8,14 +8,14 @@
 *SOUS - SYSTEME : Robiot
 *
 *SOURCE : cmoteur.cpp
-* PRESENTATION : la classe moteur permet de garder en mémoire les temps de fonctionnements du moteur
+* PRESENTATION : la classe moteur permet de garder en m?oire les temps de fonctionnements du moteur
 *
 *AUTEUR : NRT
 * VERSION CVS : 1.0
 * DATE : 15/06/2020
 * ***************************************************************/
 
-#include "cmoteur.h"
+#include "common.h"
 static const char* __cvs_id = "@(#) $Header$";
 
 /**************************************************************  
@@ -95,7 +95,7 @@ double CMoteur::getTempsFonctionnementIntermediaire() {
 
 /**************************************************************
 * METHODE      : CMoteur::addTempsFonctionnementIntermediaire
-* PRESENTATION : ajoute un temps de fonctionnement intermédaire d'un déplacement d'une cases
+* PRESENTATION : ajoute un temps de fonctionnement interm?aire d'un d?lacement d'une cases
 *
 * ENTREES : void
 *
@@ -109,7 +109,7 @@ void CMoteur::addTempsFonctionnementIntermediaire() {
 
 /**************************************************************
 * METHODE      : CMoteur::addTempsFonctionnement
-* PRESENTATION : ajoute un temps de fonctionnement global lors d'un déplacement d'une case
+* PRESENTATION : ajoute un temps de fonctionnement global lors d'un d?lacement d'une case
 *
 * ENTREES :void
 *
@@ -127,7 +127,7 @@ void CMoteur::addTempsFonctionnement() {
 *
 * ENTREES : void
 *
-* SORTIES : position : renvoie la position en haut par rapport à la position actuelle
+* SORTIES : position : renvoie la position en haut par rapport ?la position actuelle
 *
 *
 **************************************************************/
@@ -145,7 +145,7 @@ vector<int> CMoteur::haut() {
 *
 * ENTREES : void
 *
-* SORTIES : position : renvoie la position en bas par rapport à la position actuelle
+* SORTIES : position : renvoie la position en bas par rapport ?la position actuelle
 *
 **************************************************************/
 
@@ -162,7 +162,7 @@ vector<int> CMoteur::bas() {
 *
 * ENTREES : void
 *
-* SORTIES : position : renvoie la position à gauche par rapport à la position actuelle
+* SORTIES : position : renvoie la position ?gauche par rapport ?la position actuelle
 *
 **************************************************************/
 
@@ -179,7 +179,7 @@ vector<int> CMoteur::gauche() {
 *
 * ENTREES : void
 *
-* SORTIES : position : renvoie la position à droite par rapport à la position actuelle
+* SORTIES : position : renvoie la position ?droite par rapport ?la position actuelle
 *
 **************************************************************/
 
@@ -192,7 +192,7 @@ vector<int> CMoteur::droite() {
 
 /**************************************************************
 * METHODE      : CMoteur::~CMoteur
-* PRESENTATION : détruit le moteur
+* PRESENTATION : d?ruit le moteur
 *
 * ENTREES : void
 *
