@@ -6,12 +6,12 @@ using namespace std;
 class CCapteur
 {
 public:
-	//constructor
 	CCapteur();
 	CCapteur(string address);
 	~CCapteur();
-	//read
 	char getChar(int i, int j);
+	int getLongueurMap(void);
+	int getLargeurMap(void);
 private:
 	vector<vector<char>> map;
 };

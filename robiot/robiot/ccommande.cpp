@@ -1,6 +1,12 @@
 #include "ccommande.h"
 #include <math.h>
+#include <algorithm>
+#include <stdlib.h>
 
+
+CCommande::CCommande() {
+
+}
 
 CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle) {
 
@@ -30,7 +36,7 @@ CCommande::CCommande(string adresse_cartographie, string adresse_liste_controle)
 	
 	this->capteur = CCapteur(adresse_cartographie);
 	this->compas = CCompas();
-	this->moteur = CMoteur(compas);
+	this->moteur = CMoteur();
 	this->batterie = CBatterie();
 	this->arbre_courant = 0;
 	this->nb_mesures = 0;
@@ -49,118 +55,192 @@ vector<int> CCommande::arbreSuivant() {
 
 void CCommande::deplacement(vector<vector<int>> coords) {
 	vector<int> pos_actuelle;
-	for (int i = 0; coords.size(); i++) {
+	for (int i = 0; i < coords.size(); i++) {
 		pos_actuelle = compas.getPosition();
 		if (pos_actuelle[0] < coords[i][0]) {
-			moteur.gauche();
+			compas.movePosition(moteur.droite());
 			moteur.addTempsFonctionnement();
+			moteur.addTempsFonctionnementIntermediaire();
 		}
 		if (pos_actuelle[0] > coords[i][0]) {
-			moteur.droite();
+			compas.movePosition(moteur.gauche());
 			moteur.addTempsFonctionnement();
+			moteur.addTempsFonctionnementIntermediaire();
 		}
 		if (pos_actuelle[1] < coords[i][1]) {
-			moteur.bas();
+			compas.movePosition(moteur.bas());
 			moteur.addTempsFonctionnement();
+			moteur.addTempsFonctionnementIntermediaire();
 		}
 		if (pos_actuelle[1] > coords[i][1]) {
-			moteur.haut();
+			compas.movePosition(moteur.haut());
 			moteur.addTempsFonctionnement();
+			moteur.addTempsFonctionnementIntermediaire();
 		}
 	}
-	batterie.addCapacity(moteur.getTempsFonctionnement());
+	batterie.addCapacity(moteur.getTempsFonctionnementIntermediaire());
+	moteur.setTempsFonctionnementIntermediaire(0);
 }
 
-vector<vector<int>> CCommande::dijkstra(vector<int> depart, vector<int> arrivee, int longueur, int largeur, CCapteur sens) {
+vector<vector<int>> CCommande::dijkstra(vector<int> arrivee) {
 	//def des variables
-	vector<int> depart; //x et y
-	vector<int> arrivee;
+	vector<int> depart = compas.getPosition(); //x et y
+	//depart.push_back(0);
+	int longueur = capteur.getLongueurMap();
+	int largeur = capteur.getLargeurMap();
+	int xDirection, yDirection, xDistance, yDistance;
+	int i, j, minimum = 0;
 
-	int i, j, min = 0;
-
-	vector<vector<int>> voisins;
+	//vector<vector<int>> voisinage;
 	vector<int> position = depart;
-	vector<vector<int>> chemins;
-	chemins.push_back(depart);
+	//vector<vector<int>> chemins;
+	//voisinage.push_back(depart);
 	vector<vector<int>> cheminFinal;
+	vector<int> positionTest;
 
 	while (position != arrivee) {
-		vector<int> voisin;
-		voisin.push_back(depart[0] + 1);
-		voisin.push_back(depart[1]);
-		if (sens.getChar(voisin[0], voisin[1]) == ' ' && !vecteurpresent(voisin, chemins)) {
-			voisin.push_back(1 + min);
-		}
-		else {
-			voisin.push_back(10000 + min);
-		}
-		if (min != 0 && voisin[2] < min) {
-			min = voisin[2];
-		}
-		voisins.push_back(voisin);
+		
+		xDirection = arrivee[0] - position[0];
+		yDirection = arrivee[1] - position[1];
+		xDistance = abs(arrivee[0] - position[0]);
+		yDistance = abs(arrivee[1] - position[1]);
 
-		voisin.push_back(depart[0] - 1);
-		voisin.push_back(depart[1]);
-		if (sens.getChar(voisin[0], voisin[1]) == (' ' || 'O') && !vecteurpresent(voisin, chemins)) {
-			voisin.push_back(1 + min);
-		}
-		else {
-			voisin.push_back(10000 + min + min + min);
-		}
-		if (min != 0 && voisin[2] < min) {
-			min = voisin[2];
-		}
-		voisins.push_back(voisin);
+		positionTest.clear();
 
-		voisin.push_back(depart[0]);
-		voisin.push_back(depart[1] + 1);
-		if (sens.getChar(voisin[0], voisin[1]) == (' ' || 'O') && !vecteurpresent(voisin, chemins)) {
-			voisin.push_back(1 + min);
-		}
-		else {
-			voisin.push_back(10000 + min + min);
-		}
-		if (min != 0 && voisin[2] < min) {
-			min = voisin[2];
-		}
-		voisins.push_back(voisin);
-
-		voisin.push_back(depart[0]);
-		voisin.push_back(depart[1] - 1);
-		if (sens.getChar(voisin[0], voisin[1]) == (' ' || 'O') && !vecteurpresent(voisin, chemins)) {
-			voisin.push_back(1 + min);
-		}
-		else {
-			voisin.push_back(10000 + min);
-		}
-		if (min != 0 && voisin[2] < min) {
-			min = voisin[2];
-		}
-		voisins.push_back(voisin);
-
-		for (i = 0; i < voisin.size(); i++) {
-			if (voisins[i][2] == min) {
-				position = voisins[i];
-				cheminFinal[min] = position;
-				break;
+		if (xDistance > yDistance) {
+			if (xDirection > 0) {
+				positionTest.push_back(position[0] + 1);
+				positionTest.push_back(position[1]);
+				position[0]++;
+			}
+			else {
+				positionTest.push_back(position[0] - 1);
+				positionTest.push_back(position[1]);
+				position[0]--;
 			}
 		}
+		else {
+			if (yDirection > 0) {
+				positionTest.push_back(position[0]);
+				positionTest.push_back(position[1] + 1);
+				position[1]++;
+			}
+			else {
+				positionTest.push_back(position[0]);
+				positionTest.push_back(position[1] - 1);
+				position[1]--;
+			}
+		}
+
+		cheminFinal.push_back(positionTest);
+
+		/*
+		voisin.clear();
+		voisin.push_back(depart[0] + 1);
+		voisin.push_back(depart[1]);
+
+		if (!(voisin[0] > largeur || voisin[1] > longueur || voisin[0] < 0 || voisin[1] < 0)) {
+			if (capteur.getChar(voisin[0], voisin[1]) != 'X' && !vecteurpresent(voisin, voisinage)) {
+				voisin.push_back(1 + minimum);
+			}
+			else {
+				voisin.push_back(10000 + minimum);
+			}
+		}
+		else {
+			voisin.push_back(10000 + minimum);
+			if (minimum != 0 && voisin[2] < minimum) {
+				minimum = voisin[2];
+			}
+		}
+		voisinage.push_back(voisin);
+
+		voisin.clear();
+		voisin.push_back(depart[0] - 1);
+		voisin.push_back(depart[1]);
+		if (!(voisin[0] > largeur || voisin[1] > longueur || voisin[0] < 0 || voisin[1] < 0)) {
+			if (capteur.getChar(voisin[0], voisin[1]) != 'X' && !vecteurpresent(voisin, voisinage)) {
+				voisin.push_back(1 + minimum);
+			}
+			else {
+				voisin.push_back(10000 + 3*minimum);
+			}
+		}
+		else {
+			voisin.push_back(10000 + minimum);
+			if (minimum != 0 && voisin[2] < minimum) {
+				minimum = voisin[2];
+			}
+		}
+		voisinage.push_back(voisin);
+
+		voisin.clear();
+		voisin.push_back(depart[0]);
+		voisin.push_back(depart[1] + 1);
+		if (!(voisin[0] > largeur || voisin[1] > longueur || voisin[0] < 0 || voisin[1] < 0)) {
+			if (capteur.getChar(voisin[0], voisin[1]) != 'X' && !vecteurpresent(voisin, voisinage)) {
+				voisin.push_back(1 + minimum);
+			}
+			else {
+				voisin.push_back(10000 + 2*minimum);
+			}
+		}
+		else {
+			voisin.push_back(10000 + minimum);
+			if (minimum != 0 && voisin[2] < minimum) {
+				minimum = voisin[2];
+			}
+		}
+		voisinage.push_back(voisin);
+		
+		voisin.clear();
+		voisin.push_back(depart[0]);
+		voisin.push_back(depart[1] - 1);
+		if (!(voisin[0] > largeur || voisin[1] > longueur || voisin[0] < 0 || voisin[1] < 0)) {
+			if (capteur.getChar(voisin[0], voisin[1]) != 'X' && !vecteurpresent(voisin, voisinage)) {
+				voisin.push_back(1 + minimum);
+			}
+			else {
+				voisin.push_back(10000 + minimum);
+			}
+		}
+		else {
+			voisin.push_back(10000 + minimum);
+			if (minimum != 0 && voisin[2] < minimum) {
+				minimum = voisin[2];
+			}
+		}
+		voisinage.push_back(voisin);
+
+		minimum = min(voisinage[0][2], voisinage[1][2]);
+		minimum = min(minimum, voisinage[2][2]);
+		minimum = min(minimum, voisinage[3][2]);
+		minimum++;
+
+		for (i = 0; i < voisinage.size(); i++) {
+
+			if (voisinage[i][2] == minimum) {
+				position = voisinage[i];
+				cheminFinal[minimum-1] = position;
+				break;
+			}
+		}*/
 
 	}
 	return cheminFinal;
 }
 
-int CCommande::vecteurpresent(vector<int> aComparer, vector<vector<int>> comparer) {
-	vector<vector<int>> tmp = comparer;
-	int test = 0;
-	while (tmp.size() != 0) {
-		if (comparer.back()[0] == aComparer[0] or comparer.back()[1] == aComparer[1]) {
-			test = 1;
+/*int CCommande::vecteurpresent(vector<int> aComparer, vector<vector<int>> reference) {
+
+	int i = 0;
+	while ( i < reference.size()) {
+		if (reference[i][0] == aComparer[0] && reference[i][1] == aComparer[1]) {
+			return 1;
 		}
-		comparer.pop_back();
+		i++;
 	}
-	return test;
-}
+	return 0;
+}*/
 
 
 double CCommande::getTempsParcours(void) {
@@ -171,7 +251,7 @@ void CCommande::setNbMesures(int nb_mesures) {
 	this->nb_mesures = nb_mesures;
 }
 
-int CCommande::getNbMesures(void) {
+double CCommande::getNbMesures(void) {
 	return this->nb_mesures;
 }
 
@@ -186,6 +266,10 @@ void CCommande::affichage() {
 	cout << "Nombre de mesures : " << getNbMesures() << endl;
 	cout << "Capacite de la batterie estimee : " << getCapacity() << " W/h" << endl;
 	cout << "---------------------------------------------" << endl;
+}
+
+CCompas CCommande::getCompas() {
+	return this->compas;
 }
 
 void CCommande::getListe() {

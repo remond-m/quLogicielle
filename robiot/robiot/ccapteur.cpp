@@ -32,6 +32,14 @@ CCapteur::CCapteur(string address)
 	}
 }
 
+int CCapteur::getLargeurMap() {
+	return map.size();
+}
+
+int CCapteur::getLongueurMap() {
+	return map[0].size();
+}
+
 char CCapteur::getChar(int i, int j) {
 	return map[i][j];
 }

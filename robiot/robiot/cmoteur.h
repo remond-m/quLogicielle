@@ -1,21 +1,24 @@
 #pragma once
-#include "ccompas.h"
+#include <vector>
+using namespace std;
 
 class CMoteur
 {
 public:
 	CMoteur();
-	CMoteur(CCompas);
 	~CMoteur();
 	void setTempsFonctionnement(double);
 	double getTempsFonctionnement(void);
 	void addTempsFonctionnement();
-	void haut(void);
-	void bas(void);
-	void gauche(void);
-	void droite(void);
+	void addTempsFonctionnementIntermediaire(void);
+	void setTempsFonctionnementIntermediaire(double);
+	double getTempsFonctionnementIntermediaire(void);
+	vector<int> haut(void);
+	vector<int> bas(void);
+	vector<int> gauche(void);
+	vector<int> droite(void);
 private:
-	CCompas compas;
 	double temps_fonctionnement;
+	double temps_intermediaire;
 };
 
