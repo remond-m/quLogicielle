@@ -145,6 +145,7 @@
     <ClCompile Include="cmoteur.cpp" />
     <ClCompile Include="ccommande.cpp" />
     <ClCompile Include="robiot.cpp" />
+    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cbatterie.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="cmoteur.h" />
     <ClInclude Include="ccommande.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
